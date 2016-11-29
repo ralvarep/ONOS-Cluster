@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~
+|ONOS-Cluster Scenario|
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Name:        ONOS-Cluster
+
+Description: Virtual scenario of ONOS Cluster
+
+Author:      Raúl Álvarez Pinilla
+-->
+
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>ONOS-Cluster</scenario_name>
+    <automac/>
+    <vm_mgmt type="private" network="10.250.0.0" mask="24" offset="0">
+       <host_mapping />
+    </vm_mgmt>
+    <vm_defaults>
+        <console id="0" display="no"/>
+        <console id="1" display="yes"/>
+    </vm_defaults>
+  </global>
+
+  <!-- NET DEFINITION -->
+  <!-- virbr0 (192.168.122.0/24) -->
+  <net name="virbr0" mode="virtual_bridge" managed="no"/>
+  <!-- -->
+  <net name="net1-h1" mode="virtual_bridge"/>
+  <net name="net2-h2" mode="virtual_bridge"/>
+  <!-- -->
+  <net name="net1-3" mode="virtual_bridge"/>
+  <net name="net1-4" mode="virtual_bridge"/>
+  <net name="net2-3" mode="virtual_bridge"/>
+  <net name="net2-4" mode="virtual_bridge"/>
+  <!-- -->
+  <net name="net-ctrl" mode="virtual_bridge"/>
+
+  <!-- ONOS-1 -->
+  <vm name="ONOS-1" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net-ctrl">
+      <ipv4>10.10.0.1/24</ipv4>
+      <ipv6>2001:db8:10::1/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/</filetree>
+
+    <!-- Configure and Start ONOS  -->
+    <!-- <exec seq="start-all" type="verbatim">
+        nohup /root/conf/start-ONOS.sh
+    </exec> -->
+  </vm>
+
+  <!-- ONOS-2 -->
+  <vm name="ONOS-2" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net-ctrl">
+      <ipv4>10.10.0.2/24</ipv4>
+      <ipv6>2001:db8:10::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/</filetree>
+
+    <!-- Configure and Start ONOS  -->
+    <!-- <exec seq="start-all" type="verbatim">
+        nohup /root/conf/start-ONOS.sh
+    </exec>-->
+  </vm>
+
+  <!-- H1 -->
+  <vm name="h1" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net1-h1">
+      <ipv4>10.0.0.1/24</ipv4>
+      <ipv6>2001:db8::1/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+  </vm>
+
+  <!-- H2 -->
+  <vm name="h2" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net2-h2">
+      <ipv4>10.0.0.2/24</ipv4>
+      <ipv6>2001:db8::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+  </vm>
+
+  <!-- S1 -->
+  <vm name="s1" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net1-h1"/>
+    <if id="2" net="net1-3"/>
+    <if id="3" net="net1-4"/>
+    <if id="4" net="net-ctrl">
+      <ipv4>10.10.0.11/24</ipv4>
+      <ipv6>2001:db8:100::11/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s1/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+  <!-- S2 -->
+  <vm name="s2" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net2-h2"/>
+    <if id="2" net="net2-3"/>
+    <if id="3" net="net2-4"/>
+    <if id="4" net="net-ctrl">
+      <ipv4>10.10.0.12/24</ipv4>
+      <ipv6>2001:db8:100::12/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s2/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+  <!-- S3 -->
+  <vm name="s3" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net1-3"/>
+    <if id="2" net="net2-3"/>
+    <if id="3" net="net-ctrl">
+      <ipv4>10.10.0.13/24</ipv4>
+      <ipv6>2001:db8:100::13/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s3/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+  <!-- S4 -->
+  <vm name="s4" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-ONOS-Cluster</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net1-4"/>
+    <if id="2" net="net2-4"/>
+    <if id="3" net="net-ctrl">
+      <ipv4>10.10.0.14/24</ipv4>
+      <ipv6>2001:db8:100::14/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s4/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+</vnx>
