@@ -17,5 +17,5 @@ ovs-vsctl add-port s4 eth1
 ovs-vsctl add-port s4 eth2
 ovs-vsctl set bridge s4 other-config:hwaddr=00:00:00:00:00:04
 ovs-vsctl set bridge s4 protocols=OpenFlow13
-ovs-vsctl set-controller s4 tcp:10.10.0.1:6633
+ovs-vsctl set-controller s4 tcp:10.10.0.1:6633 tcp:10.10.0.2:6633
 ovs-vsctl set-fail-mode s4 secure
