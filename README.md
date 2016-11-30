@@ -56,6 +56,7 @@ When the scenario is created, you can login to consoles with root:xxxx.
 **STEP 4: Configure ONOS Cluster**
 
 Since the previous step, wait a few second while ONOS is starting.
+
 To configure the ONOS Cluster you have to execute the following command:
 ~~~
 $ sudo vnx -f ONOS-Cluster -x form-cluster
