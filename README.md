@@ -5,11 +5,11 @@ This repository provides a virtual scenario to explore the ONOS Cluster.
 Demo scenario has been created using [Virtual Networks over linuX (VNX)](http://www.dit.upm.es/~vnx/).
 
 Index:
-- [Requirements](https://github.com/ralvarep/ONOS-SDN-IP#requirements)
-- [Scenario](https://github.com/ralvarep/ONOS-SDN-IP#scenario)
-- [Usage](https://github.com/ralvarep/ONOS-SDN-IP#usage)
-- [Author](https://github.com/ralvarep/ONOS-SDN-IP#author)
-- [References](https://github.com/ralvarep/ONOS-SDN-IP#references)
+- [Requirements](https://github.com/ralvarep/ONOS-Cluster#requirements)
+- [Scenario](https://github.com/ralvarep/ONOS-Cluster#scenario)
+- [Usage](https://github.com/ralvarep/ONOS-Cluster#usage)
+- [Author](https://github.com/ralvarep/ONOS-Cluster#author)
+- [References](https://github.com/ralvarep/ONOS-Cluster#references)
 
 
 ## Requirements
