@@ -57,9 +57,14 @@ Author:      Raúl Álvarez Pinilla
     <filetree seq="on_boot" root="/root/conf/">conf/ONOS/</filetree>
 
     <!-- Configure and Start ONOS  -->
-    <!-- <exec seq="start-all" type="verbatim">
+    <exec seq="on_boot" type="verbatim">
         nohup /root/conf/start-ONOS.sh
-    </exec> -->
+    </exec>
+
+    <!-- Configure ONOS Cluster -->
+    <exec seq="form-cluster" type="verbatim">
+        /root/onos-1-7-1/bin/onos-form-cluster 10.10.0.1 10.10.0.2
+    </exec>
   </vm>
 
   <!-- ONOS-2 -->
@@ -78,9 +83,9 @@ Author:      Raúl Álvarez Pinilla
     <filetree seq="on_boot" root="/root/conf/">conf/ONOS/</filetree>
 
     <!-- Configure and Start ONOS  -->
-    <!-- <exec seq="start-all" type="verbatim">
+    <exec seq="on_boot" type="verbatim">
         nohup /root/conf/start-ONOS.sh
-    </exec>-->
+    </exec>
   </vm>
 
   <!-- H1 -->
