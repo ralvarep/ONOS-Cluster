@@ -55,6 +55,7 @@ When the scenario is created, you can login to consoles with root:xxxx.
 
 **STEP 4: Configure ONOS Cluster**
 
+Since the previous step, wait a few second while ONOS is starting.
 To configure the ONOS Cluster you have to execute the following command:
 ~~~
 $ sudo vnx -f ONOS-Cluster -x form-cluster
@@ -125,7 +126,7 @@ In addition, ONOS GUI is avaible from your host through:
 
 To login karaf:karaf. 
 
-![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/ONOS-Cluster/master/img/ONOS-GUI.jpg)
+![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/ONOS-Cluster/master/img/ONOS-GUI.png)
 
 
 **STEP 6: Connectivity Test between clients**
