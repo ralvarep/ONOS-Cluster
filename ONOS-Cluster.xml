@@ -63,7 +63,7 @@ Author:      Raúl Álvarez Pinilla
 
     <!-- Configure ONOS Cluster -->
     <exec seq="form-cluster" type="verbatim">
-        /root/onos-1-7-1/bin/onos-form-cluster 10.10.0.1 10.10.0.2
+        /root/onos-*/bin/onos-form-cluster 10.10.0.1 10.10.0.2
     </exec>
   </vm>
 
